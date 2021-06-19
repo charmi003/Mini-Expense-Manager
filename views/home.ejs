@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense Manager</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="/css/home.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/cfc8a28006.js" crossorigin="anonymous"></script> 
+</head>
+<body>
+
+       <h1>Welcome to your personal expense manager!!
+         <img src="/images/icon.png" class="body-header-img" height="100px" width="100px">
+       </h1>
+
+         <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/query/Day">Daywise</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/query/Month">Monthwise</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/query/Year">Yearwise</a>
+            </li>
+          </ul>
+    
+
+
+    <div id="container">
+
+        <div id="total-details-container">
+
+            <div class="total-in">
+                <i class="fas fa-plus-circle"></i>
+                <p class="total-cash-display">Total Cash In<br> <span>Rs.<%= total_cash_in %></span> </p>
+            </div>
+
+            <div class="total-out">
+                <i class="fas fa-minus-circle"></i>
+                <p class="total-cash-display">Total Cash Out<br> <span>Rs.<%= total_cash_out %></span> </p>
+            </div>
+
+            <div class="total-balance">
+                <i class="fas fa-wallet"></i>
+                <p class="total-cash-display">Total Balance<br> <span>Rs.<%= total_cash_in-total_cash_out %></span> </p>
+            </div>
+
+        </div>
+
+
+        
+
+        <div id="entries-container">
+
+          <h3> <i class="far fa-calendar-alt"></i> &nbsp; <%= date_header_display %> </h3>
+
+            
+            <div class="entries-container-header">
+                <span>Date & Time</span>
+                <span>Details</span>
+                <span>Amount</span>
+            </div>
+
+            <% entries.forEach(function(entry){ %>
+
+                <div class="entry-box">
+                        <p class="entry-date"> <%= entry.Date %>, <%= entry.Time %> </p>
+                        <p class="entry-detail"> <%= entry.Message %> </p>
+                    <% if(entry.Type=="in"){ %>
+                        <p class="entry-amount" style="color:green"> + <%= entry.Amount %> </p>
+                    <% } else{ %>
+                        <p class="entry-amount" style="color:red"> - <%= entry.Amount %> </p>
+                    <% } %>
+                    <a href="/deleteEntry/<%= entry._id %>"><i class="fas fa-trash" id="delete-icon"></i></a>
+                </div>
+
+            <% }) %>
+
+        </div>
+
+
+        <div id="buttons">
+            <a href="/form/in">
+                <button class="cash-in">
+                    <i class="fas fa-plus"></i> Cash In
+                </button>
+            </a>
+            
+            <a href="/form/out">
+                <button class="cash-out">
+                    <i class="fas fa-minus"></i> Cash out
+                </button>
+            </a>
+            
+        </div>
+
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="/js/home.js"></script>
+
+      
+
+</body>
+</html>
