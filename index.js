@@ -1,5 +1,6 @@
 const express=require("express");
 const port=1000;
+const hostname='0.0.0.0';
 const path=require("path");
 
 const app=express();
